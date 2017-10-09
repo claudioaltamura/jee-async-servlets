@@ -3,8 +3,6 @@ package de.claudioaltamura.jee.async.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
@@ -13,12 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(value = "/requestsimple", asyncSupported = true)
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@WebServlet(value = "/asyncrequestsimple", asyncSupported = true)
 public class AsyncRequestSimpleServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private final static Logger LOG = Logger.getLogger(AsyncRequestSimpleServlet.class.getName());
+	private final static Logger LOG = LoggerFactory.getLogger(AsyncRequestSimpleServlet.class);
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String time = request.getParameter("ms");
@@ -37,11 +38,11 @@ public class AsyncRequestSimpleServlet extends HttpServlet {
 					out.write(ms + "ms waited");
 					asyncContext.complete();
 				} catch (IllegalStateException e) {
-					LOG.log(Level.WARNING, e.getMessage());
+					LOG.warn(e.getMessage());
 				} catch (IOException e) {
-					LOG.log(Level.WARNING, e.getMessage());
+					LOG.warn(e.getMessage());
 				} catch (InterruptedException e) { //comes from Thread.sleep();
-					LOG.log(Level.WARNING, e.getMessage());
+					LOG.warn(e.getMessage());
 				}
 			}
 		});
