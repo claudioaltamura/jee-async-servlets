@@ -16,24 +16,26 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet(value = "/executorrequestcomplex", initParams = {
+@WebServlet(value = "/requestcomplexexecutor", initParams = {
 		@WebInitParam(name = "threadpoolsize", value = "3") })
-public class ExecutorRequestComplexServlet extends HttpServlet {
+public class RequestComplexExecutorServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger LOG = LoggerFactory.getLogger(ExecutorRequestComplexServlet.class);
+	private static final Logger LOG = LoggerFactory.getLogger(RequestComplexExecutorServlet.class);
 
 	public static final AtomicInteger counter = new AtomicInteger(0);
 
 	private ExecutorService executorService;
 
+	@Override
 	public void init() throws ServletException {
 
 		int size = Integer.parseInt(getInitParameter("threadpoolsize"));
 		executorService = Executors.newFixedThreadPool(size);
 	}
 
+	@Override
 	public void destroy() {
 		executorService.shutdown();
 		try {
@@ -43,6 +45,7 @@ public class ExecutorRequestComplexServlet extends HttpServlet {
 		}
 	}
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

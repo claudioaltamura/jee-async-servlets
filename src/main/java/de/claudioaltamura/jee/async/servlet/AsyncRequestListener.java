@@ -41,6 +41,9 @@ public class AsyncRequestListener implements AsyncListener {
 		LOG.info("error");
 		LOG.info(event.toString());
 
+		//https://github.com/spring-projects/spring-boot/issues/4799
+		//TODO Check servlet ErrorHandler http://www.logicbig.com/tutorials/java-ee-tutorial/java-servlet/error-handling/
+
 		AsyncContext asyncContext = event.getAsyncContext();
 		HttpServletResponse httpServletResponse = getHttpServletResponse(event.getAsyncContext().getResponse());
 		httpServletResponse.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "server error");

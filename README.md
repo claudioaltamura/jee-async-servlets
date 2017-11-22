@@ -10,11 +10,11 @@ Quick Start
 
 Open your web browser to
 
-	http://localhost:8080/async/asyncrequestsimple[?ms=10]
-	http://localhost:8080/async/asyncrequestcomplex
-	http://localhost:8080/async/executorrequestcomplex
-	http://localhost:8080/async/requestcomplex
+	http://localhost:8080/syncrequestsimple[?ms=10]
+	http://localhost:8080/asyncrequestcomplex
+	http://localhost:8080/requestcomplexexecutor
+	http://localhost:8080/requestcomplex
 
 Check out test
 
-	AsyncRequestSimpleServletIntegrationTest
+	AsyncRequestSimpleServletIntegrationTest.java

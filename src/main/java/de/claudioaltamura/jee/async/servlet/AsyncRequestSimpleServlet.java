@@ -21,6 +21,7 @@ public class AsyncRequestSimpleServlet extends HttpServlet {
 
 	private final static Logger LOG = LoggerFactory.getLogger(AsyncRequestSimpleServlet.class);
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String time = request.getParameter("ms");
 		final int ms = time != null ? Integer.valueOf(time) : new Random().nextInt(15);
